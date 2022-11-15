@@ -25,5 +25,5 @@ uvicorn==0.16.0
 watchgod==0.7
 zipp==3.6.0
 pip==21.3.1
-passlib
+passlib==1.7.4
 bcrypt==4.0.1
