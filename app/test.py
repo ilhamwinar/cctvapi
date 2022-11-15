@@ -17,10 +17,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-f = open('./temp.txt', 'r')
+f = open('./app/temp.txt', 'r')
 api=f.read()
 dictapi = ast.literal_eval(api)
 id_cctv=dictapi['id']
+
+g = open('./app/config.txt', 'r')
+ip_api=g.read()
+dictip = ast.literal_eval(ip_api)
+ip_jetson=dictip['ip']
+print(type(ip_jetson))
 
 PWD_CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -47,10 +53,10 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
 
 @app.get("/cctv/{id_cctv}")
 async def read_current_user(id_cctv,username: str = Depends(get_current_username)):
-    f = open('./temp.txt', 'r')
+    f = open('./app/temp.txt', 'r')
     api=f.read()
     dictapi = ast.literal_eval(api)
     return dictapi
 
 if __name__ == "__main__":
-    uvicorn.run("test:app", host='192.168.0.117', port=90,log_level="info",reload=True)
+    uvicorn.run("test:app", host=ip_jetson, port=90,log_level="info",reload=True)
