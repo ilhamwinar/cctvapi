@@ -4,6 +4,7 @@ import ast
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from passlib.context import CryptContext
+import os
 
 #variable declaration
 app = FastAPI()
@@ -21,12 +22,11 @@ f = open('./app/temp.txt', 'r')
 api=f.read()
 dictapi = ast.literal_eval(api)
 id_cctv=dictapi['id']
-
+id_cctv_temp=id_cctv
 g = open('./app/config.txt', 'r')
 ip_api=g.read()
 dictip = ast.literal_eval(ip_api)
 ip_jetson=dictip['ip']
-print(type(ip_jetson))
 
 PWD_CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -46,13 +46,16 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
     if not (is_correct_username and is_correct_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password",
+            detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Basic"},
         )
     return credentials.username
 
 @app.get("/cctv/{id_cctv}")
 async def read_current_user(id_cctv,username: str = Depends(get_current_username)):
+    if id_cctv_temp != id_cctv:
+        raise HTTPException(status_code=400, detail="Wrong CCTV Location") 
+ 
     f = open('./app/temp.txt', 'r')
     api=f.read()
     dictapi = ast.literal_eval(api)
