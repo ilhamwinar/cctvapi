@@ -1,0 +1,1 @@
+{'total_kr_down': 132, 'Bus_down': 4, 'car_down': 72, 'truck_down': 56, 'total_kr_up': 120, 'Bus_up': 14, 'car_up': 37, 'truck_up': 69, 'id': 'JAPEK', 'time': '22-11-2022 06:06:22.498340'}

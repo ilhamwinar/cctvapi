@@ -1,1 +1,4 @@
-docker cp aicctv:/yolov5-deepsort-tensorrt/build/temp.txt /home/jetson/serviceai/cctvapi/app/temp.txt
+#docker cp aicctv:/yolov5-deepsort-tensorrt/build/temp.txt /home/avc-iot/serviceai/cctvapi/app/temp.txt
+
+#nyoba
+docker cp aicctv:/yolov5-deepsort-tensorrt/build/temp.txt /home/avc-iot/serviceai/cctvapi/app/temp.txt

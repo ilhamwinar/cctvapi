@@ -18,12 +18,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-f = open('./app/temp.txt', 'r')
+f = open('./temp.txt', 'r')
 api=f.read()
 dictapi = ast.literal_eval(api)
 id_cctv=dictapi['id']
 id_cctv_temp=id_cctv
-g = open('./app/config.txt', 'r')
+g = open('./config.txt', 'r')
 ip_api=g.read()
 dictip = ast.literal_eval(ip_api)
 ip_jetson=dictip['ip']
@@ -56,7 +56,7 @@ async def read_current_user(id_cctv,username: str = Depends(get_current_username
     if id_cctv_temp != id_cctv:
         raise HTTPException(status_code=400, detail="Wrong CCTV Location") 
  
-    f = open('./app/temp.txt', 'r')
+    f = open('./temp_result.txt', 'r')
     api=f.read()
     dictapi = ast.literal_eval(api)
     return dictapi
