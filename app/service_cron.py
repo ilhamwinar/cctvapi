@@ -8,11 +8,10 @@ list_minutes=[]
 z = {}
 
 for i in range(5):
-    time.sleep(61)
-    time.sleep(500/1000)
+    time.sleep(60)
+    time.sleep(300/1000)
     f = open('temp.txt', 'r')
     api=f.read()
-    print(type(api))
     dictapi = ast.literal_eval(api)
     id=dictapi['id']
     dictapi.pop('id')
